@@ -11,9 +11,9 @@
 <body>
 
     {{-- Navbar --}}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-warning bg-warning">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/') }}">IURAN<span class="text-info">WARGA</span></a>
+            <a class="navbar-brand" href="{{ url('/') }}">IURANWARGA</span></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
