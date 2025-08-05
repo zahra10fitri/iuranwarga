@@ -1,6 +1,6 @@
 @extends('template')
 
-@section('title', 'Beranda')
+@section('title', 'beranda')
 
 @section('content')
     <div class="text-center">
