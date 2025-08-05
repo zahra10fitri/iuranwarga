@@ -12,7 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('payments', function (Blueprint $table) {
-            $table->id();
+             $table->id();
+            $table->foreignId('iduser')->constrained('users')->onDelete('cascade');
+            $table->enum('period', ['mingguan', 'bulanan', 'tahunan']);
+            $table->integer('nominal');
+            $table->string('petugas');
             $table->timestamps();
         });
     }

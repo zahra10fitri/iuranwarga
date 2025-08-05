@@ -12,8 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('dues_categories', function (Blueprint $table) {
-            $table->id();
+           $table->id();
+            $table->enum('period', ['mingguan', 'bulanan', 'tahunan']);
+            $table->integer('nominal');
+            $table->boolean('status'); // aktif / tidak
             $table->timestamps();
+
         });
     }
 
