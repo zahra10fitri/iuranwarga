@@ -1,15 +1,15 @@
 @extends('template')
 
-@section('content')
-<div class="container mt-5 text-center">
-    <h1 class="fw-bold mb-3">Mencatat pemasukan, pengeluaran, iuran dan Arisan</h1>
-    <p class="mb-4">
-        Aplikasi keuangan digital pribadi, mencatat pemasukan, biaya / pengeluaran, kartu iuran dan arisan dengan mudah
-    </p>
+@section('title', 'Beranda')
 
-    <div class="d-flex justify-content-center">
-        <img src="{{ asset('assets/google-play.png') }}" alt="Google Play" style="height:60px; margin-right:10px;">
-        <img src="{{ asset('assets/app-store.png') }}" alt="App Store" style="height:60px;">
+@section('content')
+    <div class="text-center">
+        <h1>Selamat Datang di Aplikasi Iuran Warga</h1>
+        <p class="mt-3">Aplikasi ini membantu mencatat pemasukan, pengeluaran, iuran, dan arisan warga dengan mudah dan rapi.</p>
+        
+        <div class="d-flex justify-content-center mt-4">
+            <img src="{{ asset('assets/google-play.png') }}" alt="Google Play" height="60" class="me-3">
+            <img src="{{ asset('assets/app-store.png') }}" alt="App Store" height="60">
+        </div>
     </div>
-</div>
 @endsection
