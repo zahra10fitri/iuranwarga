@@ -23,13 +23,32 @@
             </div>
         </div>
 
-        <!-- Iuran Kas Card -->
+ <!-- Iuran Kas Card -->
         <div class="col-md-6">
             <div class="card text-white bg-primary mb-3">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h3 class="card-title font-weight-bold">{{ $totalIuran }}</h3>
-                        <p class="card-text">Iuran Kas</p>
+                        <p class="card-text">pembayaran</p>
+                    </div>
+                    <i class="fas fa-cash-register fa-3x opacity-50"></i>
+                </div>
+                <div class="card-footer bg-transparent border-top-0">
+                    <span class="text-white" style="cursor: not-allowed;">
+                        Lihat Data <i class="fas fa-arrow-circle-right"></i>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ <!-- Iuran Kas Card -->
+        <div class="col-md-6">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h3 class="card-title font-weight-bold">{{ $totalIuran }}</h3>
+                        <p class="card-text">kategori iuran</p>
                     </div>
                     <i class="fas fa-cash-register fa-3x opacity-50"></i>
                 </div>
