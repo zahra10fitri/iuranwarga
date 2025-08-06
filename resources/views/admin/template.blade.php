@@ -26,9 +26,9 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
                 {{-- Menu Navigasi --}}
                 <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="{{ url('/beranda') }}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Categoriesi</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categorie</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Member</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">officer</a></li>
                 </ul>
 
                 {{-- Auth: Login/Register atau Nama & Logout --}}

@@ -18,27 +18,38 @@ class AuthController extends Controller
     {
         return view('register');
     }
+public function login(Request $request)
+{
+    $request->validate([
+        'email' => 'required',
+        'password' => 'required',
+    ]);
 
-    public function login(Request $request)
-    {
-        $request->validate([
-            'email' => 'required',
-            'password' => 'required',
-        ]);
+    $login = $request->input('email'); 
+    $password = $request->input('password');
 
-        $login = $request->input('email'); 
-        $password = $request->input('password');
+    // Cek apakah input adalah email atau username
+    $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
 
-        // Cek apakah input adalah email atau username
-        $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+    if (Auth::attempt([$field => $login, 'password' => $password])) {
+        $request->session()->regenerate();
 
-        if (Auth::attempt([$field => $login, 'password' => $password])) {
-            $request->session()->regenerate();
+        $user = Auth::user();
+
+        // Arahkan berdasarkan level user
+        if ($user->level === 'admin') {
+            return redirect()->route('dashboard');
+        } elseif ($user->level === 'warga') {
             return redirect()->route('beranda');
+        } else {
+            Auth::logout();
+            return redirect('/login')->with('status', 'Level pengguna tidak valid.');
         }
-
-        return back()->with('status', 'Email / Username atau Password salah!');
     }
+
+    return back()->with('status', 'Email / Username atau Password salah!');
+}
+
 
     public function register(Request $request)
     {
