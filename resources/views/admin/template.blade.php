@@ -12,7 +12,7 @@
     {{-- Bootstrap CDN --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body>         
 
     {{-- Navbar (hanya tampil jika bukan di halaman login/register) --}}
     @if (!Request::is('login') && !Request::is('register'))
