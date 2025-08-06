@@ -24,3 +24,11 @@ Route::post('/logout', function (Request $request) {
     $request->session()->regenerateToken();
     return redirect('/login');
 })->name('logout');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+// Contoh routing data
+Route::get('/warga', [WargaController::class, 'index'])->name('warga');
+Route::get('/iuran', [IuranController::class, 'index'])->name('iuran');
