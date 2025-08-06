@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\Warga;
-
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
