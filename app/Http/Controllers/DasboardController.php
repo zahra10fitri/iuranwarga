@@ -17,7 +17,6 @@ class DashboardController extends Controller
         $totalIuran = Payment::count();
 
         // Kirim data ke view
-      return view('admin.dashboard', compact('totalWarga', 'totalIuran'));
-
-}
+        return view('admin.dashboard', compact('totalWarga', 'totalIuran'));
+    }
 }

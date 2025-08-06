@@ -10,7 +10,7 @@ use App\Http\Controllers\IuranController;
 use App\Http\Controllers\DashboardController;
 
 // Halaman beranda (hanya bisa diakses setelah login)
-Route::get('/', [BerandaController::class, 'index'])->middleware('auth')->name('beranda');
+Route::get('/', [BerandaController::class, 'index'])->name('beranda');
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 // Login
