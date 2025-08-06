@@ -29,9 +29,9 @@ class DatabaseSeeder extends Seeder
     ]);
         
         $warga1 = User::create([
-            'name' => 'admin',
-            'username' => 'admin123',
-            'email' => 'admin@gmail.com',
+            'name' => 'warga1',
+            'username' => 'warga123',
+            'email' => 'warga1@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
             'address' => 'Jl. Kenanga No. 8',
@@ -40,9 +40,9 @@ class DatabaseSeeder extends Seeder
      ]);
         
                 $warga2 = User::create([
-            'name' => 'Warga',
-            'username' => 'warga123',
-            'email' => 'warga@gmail.com',
+            'name' => 'Warga2',
+            'username' => 'warga1234',
+            'email' => 'warga2@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
             'address' => 'Jl. Kenanga No. 8',
