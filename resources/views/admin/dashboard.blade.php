@@ -2,60 +2,77 @@
 
 @section('content')
 <div class="container mt-4">
-    <h2 class="mb-4">Aplikasi Iuran Kas</h2>
-    
+    <h2 class="mb-4 text-center">Dashboard Aplikasi Iuran Warga</h2>
+
     <div class="row">
-        <!-- Data Warga Card -->
-        <div class="col-md-6">
-            <div class="card text-white bg-success mb-3">
+        <!-- Data Warga -->
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="card-title font-weight-bold">{{ $totalWarga }}</h3>
-                        <p class="card-text">Data Warga</p>
+                        <h4 class="card-title mb-0">{{ $totalWarga }}</h4>
+                        <small>Data Warga</small>
                     </div>
-                    <i class="fas fa-user fa-3x opacity-50"></i>
+                    <i class="fas fa-users fa-2x opacity-75"></i>
                 </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <span class="text-white" style="cursor: not-allowed;">
-                        Lihat Data <i class="fas fa-arrow-circle-right"></i>
-                    </span>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.warga') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
- <!-- Iuran Kas Card -->
-        <div class="col-md-6">
-            <div class="card text-white bg-primary mb-3">
+        <!-- Pembayaran -->
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="card-title font-weight-bold">{{ $totalIuran }}</h3>
-                        <p class="card-text">pembayaran</p>
+                        <h4 class="card-title mb-0">{{ $totalIuran }}</h4>
+                        <small>Pembayaran</small>
                     </div>
-                    <i class="fas fa-cash-register fa-3x opacity-50"></i>
+                    <i class="fas fa-money-bill-wave fa-2x opacity-75"></i>
                 </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <span class="text-white" style="cursor: not-allowed;">
-                        Lihat Data <i class="fas fa-arrow-circle-right"></i>
-                    </span>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.peyment') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</div>
- <!-- Iuran Kas Card -->
-        <div class="col-md-6">
-            <div class="card text-white bg-primary mb-3">
+
+        <!-- Kategori Iuran -->
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3 shadow-sm">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h3 class="card-title font-weight-bold">{{ $totalIuran }}</h3>
-                        <p class="card-text">kategori iuran</p>
+                        <h4 class="card-title mb-0">{{ $totalKategori }}</h4>
+                        <small>Kategori Iuran</small>
                     </div>
-                    <i class="fas fa-cash-register fa-3x opacity-50"></i>
+                    <i class="fas fa-layer-group fa-2x opacity-75"></i>
                 </div>
-                <div class="card-footer bg-transparent border-top-0">
-                    <span class="text-white" style="cursor: not-allowed;">
-                        Lihat Data <i class="fas fa-arrow-circle-right"></i>
-                    </span>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.kategori') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Petugas / Officer -->
+        <div class="col-md-3">
+            <div class="card text-white bg-danger mb-3 shadow-sm">
+                <div class="card-body d-flex justify-content-between align-items-center">
+                    <div>
+                        <h4 class="card-title mb-0">{{ $totalPetugas }}</h4>
+                        <small>Data Officer</small>
+                    </div>
+                    <i class="fas fa-user-shield fa-2x opacity-75"></i>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.officer') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
