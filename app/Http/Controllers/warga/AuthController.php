@@ -1,12 +1,15 @@
 <?php
 
 namespace App\Http\Controllers\Warga;
+
+use App\Http\Controllers\Controller; // ✅ Tambahkan ini
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
+
 {
     public function showLogin()
     {
