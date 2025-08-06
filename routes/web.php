@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Http\Controllers\BerandaController;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\WargaController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\WargaController;
+use App\Http\Controllers\Warga\BerandaController;
+use App\Http\Controllers\Warga\AuthController;
 use App\Http\Controllers\IuranController;
-use App\Http\Controllers\DashboardController;
+
 
 
 // Halaman beranda (hanya bisa diakses setelah login)
@@ -29,6 +30,7 @@ Route::post('/logout', function (Request $request) {
     $request->session()->regenerateToken();
     return redirect('/login');
 })->name('logout');
+
 
 // Dashboard (butuh login juga)
 

@@ -1,6 +1,7 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Warga;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,6 +19,7 @@ class AuthController extends Controller
     {
         return view('register');
     }
+
 public function login(Request $request)
 {
     $request->validate([
@@ -34,16 +36,12 @@ public function login(Request $request)
     if (Auth::attempt([$field => $login, 'password' => $password])) {
         $request->session()->regenerate();
 
+        // Cek level user setelah login
         $user = Auth::user();
-
-        // Arahkan berdasarkan level user
         if ($user->level === 'admin') {
             return redirect()->route('dashboard');
-        } elseif ($user->level === 'warga') {
-            return redirect()->route('beranda');
         } else {
-            Auth::logout();
-            return redirect('/login')->with('status', 'Level pengguna tidak valid.');
+            return redirect()->route('beranda');
         }
     }
 

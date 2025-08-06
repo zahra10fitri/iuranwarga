@@ -27,7 +27,7 @@
                 {{-- Menu Navigasi --}}
                 <ul class="navbar-nav">
                     <li class="nav-item"><a class="nav-link" href="#">Categorie</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Member</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">warga</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">officer</a></li>
                 </ul>
 
