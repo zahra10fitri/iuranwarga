@@ -15,7 +15,7 @@ return new class extends Migration
            $table->id();
             $table->enum('period', ['mingguan', 'bulanan', 'tahunan']);
             $table->integer('nominal');
-            $table->boolean('status'); // aktif / tidak
+             $table->enum('status', ['aktif', 'nonaktif']); // aktif / tidak
             $table->timestamps();
 
         });

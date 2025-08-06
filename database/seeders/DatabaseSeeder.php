@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use App\Models\DuesCategory;
 use App\Models\DuesMember;
+use App\Models\Payment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -103,7 +104,7 @@ class DatabaseSeeder extends Seeder
 
             Payment::create([
             'iduser' => $warga1->id,
-            'period' => '2025-08',
+            'period' => 'mingguan',
             'nominal' => 50000,
             'petugas' => 'adminrw'
             
@@ -111,7 +112,7 @@ class DatabaseSeeder extends Seeder
 
             Payment::create([
             'iduser' => $warga2->id,
-            'period' => '2025-08',
+            'period' => 'bulanan',
             'nominal' => 50000,
             'petugas' => 'adminrw'
             
@@ -119,7 +120,7 @@ class DatabaseSeeder extends Seeder
 
                 Payment::create([
             'iduser' => $warga2->id,
-            'period' => '2025-08',
+            'period' => 'tahunan',
             'nominal' => 50000,
             'petugas' => 'adminrw'
             
