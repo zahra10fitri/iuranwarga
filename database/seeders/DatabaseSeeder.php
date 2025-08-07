@@ -19,18 +19,18 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
          
             $user1 = User::create([
-            'name' => 'Admin RW',
-            'username' => 'adminrw',
-            'email' => 'adminrw@example.com',
-            'password' => bcrypt('123456'),
+            'name' => 'pak rt',
+            'username' => 'pakrt',
+            'email' => 'adminrt@gmail.com',
+            'password' => bcrypt('123'),
             'nohp' => '08123456700',
             'address' => 'Jl. Dahlia No. 9',
             'level' => 'admin',
     ]);
         
           $user2 = User::create([
-            'name' => 'admin',
-            'username' => 'admin123',
+            'name' => 'ibu rt',
+            'username' => 'burt',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
@@ -40,7 +40,7 @@ class DatabaseSeeder extends Seeder
      ]);
         
             $user3 = User::create([
-            'name' => 'Warga',
+            'name' => 'zahra',
             'username' => 'warga123',
             'email' => 'warga@gmail.com',
             'password' => bcrypt('123'),
@@ -51,7 +51,7 @@ class DatabaseSeeder extends Seeder
     ]);
 
              $user4 = User::create([
-            'name' => 'Warga3',
+            'name' => 'tasa',
             'username' => 'warga12345',
             'email' => 'warga3@gmail.com',
             'password' => bcrypt('123'),
@@ -93,13 +93,13 @@ class DatabaseSeeder extends Seeder
         DuesMember::create([
             'iduser' => $user2->id,
             'idduescategory' => 2, 
-            // bulanan
+           
     ]);
 
          DuesMember::create([
             'iduser' => $user3->id,
             'idduescategory' => 3, 
-            // bulanan
+        
     ]);
 
             Payment::create([

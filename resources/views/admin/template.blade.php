@@ -1,54 +1,57 @@
 <!DOCTYPE html>
-<html lang="id">
-@php
-    use Illuminate\Support\Facades\Auth;
-@endphp
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>@yield('title', 'Iuran Warga - Admin')</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    {{-- Bootstrap CDN --}}
+    <title>Dashboard Admin - Iuran Warga</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            overflow-x: hidden;
+        }
+        .sidebar {
+            width: 220px;
+            background-color: #343a40;
+            color: white;
+            flex-shrink: 0;
+        }
+        .sidebar a {
+            color: white;
+            padding: 12px 20px;
+            display: block;
+            text-decoration: none;
+        }
+       
+        .content {
+            flex-grow: 1;
+            padding: 30px;
+        }
+        .sidebar .logo {
+            font-size: 1.5rem;
+            text-align: center;
+            padding: 15px 0;
+            font-weight: bold;
+            background-color: #212529;
+           
+        }
+    </style>
 </head>
-<body>         
+<body>
 
-    {{-- Navbar khusus admin --}}
-    @if (Auth::check() && Auth::user()->level === 'admin')
-    <nav class="navbar navbar-expand-lg navbar-warning bg-warning">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="{{ url('/dashboard') }}">ADMIN - IURANWARGA</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<div class="sidebar">
+    <div class="logo">Iuran Warga</div>
+    <a href="{{ route('dashboard') }}"><i class="fas fa-home me-2"></i> Dashboard</a>
+    <a href="{{ route('admin.warga') }}"><i class="fas fa-users me-2"></i> Data Warga</a>
+    <a href="{{ route('admin.peyment') }}"><i class="fas fa-money-bill-wave me-2"></i> Pembayaran</a>
+    <a href="{{ route('admin.categories') }}"><i class="fas fa-layer-group me-2"></i> Kategori Iuran</a>
+    <a href="{{ route('admin.officer') }}"><i class="fas fa-user-shield me-2"></i> Data Officer</a>
+</div>
 
-            <div class="collapse navbar-collapse justify-content-between" id="navbarNav">
-                {{-- Menu Navigasi Admin --}}
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#">Kategori Iuran</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Data Warga</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Petugas</a></li>
-                </ul>
+<div class="content">
+    @yield('content')
+</div>
 
-                {{-- Info User & Logout --}}
-                <div class="d-flex gap-2">
-                    <span class="navbar-text me-2">{{ Auth::user()->name }}</span>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button class="btn btn-outline-dark" type="submit">Logout</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </nav>
-    @endif
-
-    {{-- Konten Dinamis --}}
-    <main class="container mt-4">
-        @yield('content')
-    </main>
-
-    {{-- JS Bootstrap --}}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

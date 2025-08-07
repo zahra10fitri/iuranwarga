@@ -2,7 +2,7 @@
 
 @section('content')
 <h3 class="mb-4">Data Warga</h3>
-<a href="{{ route('warga.create') }}" class="btn btn-primary mb-3">Tambah Warga</a>
+<a href="{{ route('admin.warga.create') }}" class="btn btn-primary mb-3">Tambah Warga</a>
 
 <table class="table table-bordered">
     <thead>
@@ -14,14 +14,16 @@
         </tr>
     </thead>
     <tbody>
-        @foreach($wargas as $warga)
+        @foreach($warga as $warga)
         <tr>
             <td>{{ $warga->name }}</td>
             <td>{{ $warga->nohp }}</td>
             <td>{{ $warga->address }}</td>
+            <td>{{ $warga->level }}</td>
+
             <td>
-                <a href="{{ route('warga.edit', $warga->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                <form action="{{ route('warga.destroy', $warga->id) }}" method="POST" class="d-inline">
+                <a href="{{ route('admin.warga.edit', $warga->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                <form action="{{ route('admin.warga.destroy', $warga->id) }}" method="POST" class="d-inline">
                     @csrf @method('DELETE')
                     <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
                 </form>

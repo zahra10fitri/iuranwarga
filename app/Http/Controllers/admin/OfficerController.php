@@ -11,7 +11,7 @@ class OfficerController extends Controller
     public function index()
     {
         $officers = User::where('level', 'admin')->get();
-        return view('admin.officer.index', compact('officers'));
+        return view('admin.officer', compact('officers'));
     }
 
     public function create()

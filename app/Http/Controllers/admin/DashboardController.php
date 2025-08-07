@@ -1,23 +1,27 @@
 <?php
+
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Payment;
+use App\Models\DuesCategory;
 
 class DashboardController extends Controller
-
 {
     public function index()
     {
-        // Hitung jumlah warga
-        $totalWarga = User::where('level', 'warga')->count();
+      $totalWarga = User::where('level', 'warga')->count();
+        $totalPembayaran = Payment::count();
+        $totalKategori = DuesCategory::count();
+        $totalPetugas = User::where('level', 'admin')->count(); // P besar
 
-        // Hitung jumlah pembayaran iuran
-        $totalIuran = Payment::count();
-
-        // Kirim data ke view
-        return view('admin.dashboard', compact('totalWarga', 'totalIuran'));
+        return view('admin.dashboard', compact(
+            'totalWarga',
+            'totalPembayaran',
+            'totalKategori',
+            'totalPetugas'
+        ));
+        
     }
 }
