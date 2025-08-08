@@ -23,10 +23,12 @@
 
             <td>
                 <a href="{{ route('admin.warga.edit', $warga->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                <form action="{{ route('admin.warga.destroy', $warga->id) }}" method="POST" class="d-inline">
-                    @csrf @method('DELETE')
-                    <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
-                </form>
+             <form action="{{ route('admin.warga.destroy', $warga->id) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-sm btn-danger" onclick="return confirm('Yakin?')">Hapus</button>
+        </form>
+
             </td>
         </tr>
         @endforeach

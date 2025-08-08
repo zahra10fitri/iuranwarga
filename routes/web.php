@@ -31,9 +31,10 @@ Route::get('/admin/officer', [PeymentController::class, 'index'])->name('admin.o
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga.index');
 Route::get('/admin/warga/create', [WargaController::class, 'create'])->name('admin.warga.create');
 Route::post('/admin/warga', [WargaController::class, 'store'])->name('admin.warga.store');
+Route::get('/admin/warga/{id}/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
+Route::put('/admin/warga/{id}', [WargaController::class, 'update'])->name('admin.warga.update');
+Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
 
-Route::post('/admin/warga/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
-Route::post('/admin/warga/destroy', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
 
 Route::post('/logout', function (Request $request) {
     Auth::logout();

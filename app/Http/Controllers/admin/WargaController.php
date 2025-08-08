@@ -45,43 +45,36 @@ class WargaController extends Controller
     return redirect()->route('admin.warga.index')->with('success', 'Warga berhasil ditambahkan.');
 
     }
-    public function edit($id)
+public function edit($id)
 {
-    $warga = User::where('level', 'warga')->findOrFail($id);
-    return view('admin.warga.edit', compact('warga'));
+    $warga = User::findOrFail($id);
+    return view('admin.warga-edit', compact('warga'));
 }
 
 public function update(Request $request, $id)
 {
-    $warga = User::where('level', 'warga')->findOrFail($id);
-
     $request->validate([
-        'name'     => 'required|string|max:255',
-        'username' => 'required|string|max:100|unique:users,username,' . $warga->id,
-        'nohp'     => 'required|string|max:20',
-        'address'  => 'required|string',
-        'email'    => 'required|email|unique:users,email,' . $warga->id,
-        'password' => 'nullable|string|min:6',
+        'name' => 'required',
+        'nohp' => 'required',
+        'address' => 'required',
+        'level' => 'required'
     ]);
 
-    $warga->update([
-        'name'     => $request->name,
-        'username' => $request->username,
-        'nohp'     => $request->nohp,
-        'address'  => $request->address,
-        'email'    => $request->email,
-        'password' => $request->password ? bcrypt($request->password) : $warga->password,
-    ]);
+    $warga = User::findOrFail($id);
+    $warga->update($request->all());
 
-    return redirect()->route('admin.warga')->with('success', 'Data warga berhasil diperbarui.');
+    return redirect()->route('admin.warga')->with('success', 'Data warga berhasil diperbarui');
 }
+
 
 public function destroy($id)
 {
-    $warga = User::all(); // Menampilkan semua user: baik admin maupun warga
+    $warga = User::findOrFail($id); // Kalau modelnya User
     $warga->delete();
 
     return redirect()->route('admin.warga')->with('success', 'Data warga berhasil dihapus.');
 }
+
+
 
 }
