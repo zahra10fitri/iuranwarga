@@ -34,7 +34,7 @@
                     <i class="fas fa-money-bill-wave fa-2x opacity-75"></i>
                 </div>
                 <div class="card-footer bg-transparent border-top-0 text-end">
-                    <a href="{{ route('admin.peyment') }}" class="text-white text-decoration-none">
+                    <a href="{{ route('admin.payment') }}" class="text-white text-decoration-none">
                         Lihat <i class="fas fa-arrow-circle-right"></i>
                     </a>
                 </div>

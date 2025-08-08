@@ -3,7 +3,15 @@
 @section('content')
 <div class="container">
     <h1>Tambah Data Warga</h1>
-
+@if($errors->any())
+        <div class="alert alert-danger">
+            <ul class="mb-0">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
     <form action="{{ route('admin.warga.store') }}" method="POST">
         @csrf
 
@@ -37,10 +45,18 @@
             <input type="password" name="password" class="form-control" required>
         </div>
 
-        <input type="hidden" name="level" value="warga">
+        {{-- GANTI INI --}}
+        <div class="mb-3">
+            <label for="level" class="form-label">Level</label>
+            <select name="level" class="form-control" required>
+                <option value="">-- Pilih Level --</option>
+                <option value="warga">Warga</option>
+                <option value="admin">Admin</option>
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Simpan</button>
-        <a href="{{ route('admin.warga') }}" class="btn btn-secondary">Batal</a>
+     <a href="{{ route('admin.warga') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

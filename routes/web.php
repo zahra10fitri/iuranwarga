@@ -24,11 +24,14 @@ Route::post('/register', [AuthController::class, 'register'])->name('register.su
 Route::get('/admin/categories', [DuesCategoryController::class, 'index'])->name('admin.categories');
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga');
 Route::get('/admin/warga-create', [WargaController::class, 'index'])->name('admin.warga');
-Route::get('/admin/peyment', [PeymentController::class, 'index'])->name('admin.peyment');
+Route::get('/admin/payment', [PeymentController::class, 'index'])->name('admin.payment');
 Route::get('/admin/officer', [PeymentController::class, 'index'])->name('admin.officer');
 
+// Tampilkan daftar warga
+Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga.index');
 Route::get('/admin/warga/create', [WargaController::class, 'create'])->name('admin.warga.create');
-Route::post('/admin/warga/store', [WargaController::class, 'store'])->name('admin.warga.store');
+Route::post('/admin/warga', [WargaController::class, 'store'])->name('admin.warga.store');
+
 Route::post('/admin/warga/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
 Route::post('/admin/warga/destroy', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
 

@@ -11,7 +11,7 @@ class WargaController extends Controller
 {
     public function index()
     {
-        $warga = User::where('level', 'warga')->get();
+        $warga = User::all(); 
         return view('admin.warga', compact('warga'));
     }
 
@@ -21,27 +21,29 @@ class WargaController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'name'     => 'required|string|max:255',
-            'username' => 'required|string|max:100|unique:users',
-            'nohp'     => 'required|string|max:20',
-            'address'  => 'required|string',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|string|min:6',
-        ]);
+{
+    $validated = $request->validate([
+        'name' => 'required',
+        'username' => 'required|unique:users',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6',
+        'nohp' => 'required',
+        'address' => 'required',
+        'level' => 'required|in:admin,warga',
+    ]);
 
-        User::create([
-            'name'     => $request->name,
-            'username' => $request->username,
-            'nohp'     => $request->nohp,
-            'address'  => $request->address,
-            'email'    => $request->email,
-            'password' => Hash::make($request->password),
-            'level'    => 'warga',
-        ]);
+    User::create([
+        'name' => $validated['name'],
+        'username' => $validated['username'],
+        'email' => $validated['email'],
+        'password' => bcrypt($validated['password']),
+        'nohp' => $validated['nohp'],
+        'address' => $validated['address'],
+        'level' => $validated['level'],
+    ]);
 
-        return redirect()->route('admin.warga')->with('success', 'Data warga berhasil ditambahkan.');
+    return redirect()->route('admin.warga.index')->with('success', 'Warga berhasil ditambahkan.');
+
     }
     public function edit($id)
 {
@@ -76,7 +78,7 @@ public function update(Request $request, $id)
 
 public function destroy($id)
 {
-    $warga = User::where('level', 'warga')->findOrFail($id);
+    $warga = User::all(); // Menampilkan semua user: baik admin maupun warga
     $warga->delete();
 
     return redirect()->route('admin.warga')->with('success', 'Data warga berhasil dihapus.');

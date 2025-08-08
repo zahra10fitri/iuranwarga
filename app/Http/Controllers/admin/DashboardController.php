@@ -11,7 +11,7 @@ class DashboardController extends Controller
 {
     public function index()
     {
-      $totalWarga = User::where('level', 'warga')->count();
+      $totalWarga =User::all()->count(); 
         $totalPembayaran = Payment::count();
         $totalKategori = DuesCategory::count();
         $totalPetugas = User::where('level', 'admin')->count(); // P besar
