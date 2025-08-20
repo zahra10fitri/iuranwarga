@@ -16,6 +16,15 @@ class PaymentController extends Controller
         return view('admin.payment.index', compact('payments'));
     }
 
+    public function verify($id)
+    {
+        $payment = Payment::findOrFail($id);
+        $payment->status = 'verified';
+        $payment->save();
+
+        return redirect()->route('payments.index')->with('success', 'Pembayaran berhasil diverifikasi.');
+    }
+
     public function create()
     {
         $users = User::where('level', 'warga')->get();

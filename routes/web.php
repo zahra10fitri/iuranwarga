@@ -28,12 +28,12 @@ Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga
 Route::get('/admin/warga-create', [WargaController::class, 'index'])->name('admin.warga');
 Route::get('/admin/payment', [PaymentController::class, 'index'])->name('admin.payment');
 
-    Route::get('/admin/officer', [OfficerController::class, 'index'])->name('admin.officer.index');
-    Route::get('/admin/officer/create', [OfficerController::class, 'create'])->name('officer.create');
-    Route::post('/admin/officer', [OfficerController::class, 'store'])->name('officer.store');
-    Route::get('/admin/officer/{id}/edit', [OfficerController::class, 'edit'])->name('officer.edit');
-    Route::put('/admin/officer/{id}', [OfficerController::class, 'update'])->name('officer.update');
-    Route::delete('/admin/officer/{id}', [OfficerController::class, 'destroy'])->name('officer.destroy');
+    Route::get('/admin/officer', [OfficerController::class, 'index'])->name('admin.officer');
+    Route::get('/admin/officer/create', [OfficerController::class, 'create'])->name('admin.officer.create');
+    Route::post('/admin/officer', [OfficerController::class, 'store'])->name('admin.officer.store');
+    Route::get('/admin/officer/{id}/edit', [OfficerController::class, 'edit'])->name('admin.officer.edit');
+    Route::put('/admin/officer/{id}', [OfficerController::class, 'update'])->name('admin.officer.update');
+    Route::delete('/admin/officer/{id}', [OfficerController::class, 'destroy'])->name('admin.officer.destroy');
 
 // Tampilkan daftar warga
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga.index');
@@ -42,6 +42,8 @@ Route::post('/admin/warga', [WargaController::class, 'store'])->name('admin.warg
 Route::get('/admin/warga/{id}/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
 Route::put('/admin/warga/{id}', [WargaController::class, 'update'])->name('admin.warga.update');
 Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
+
+ Route::post('admin/payments/{id}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
 
 
 Route::post('/logout', function (Request $request) {

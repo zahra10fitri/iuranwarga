@@ -16,16 +16,17 @@
     <tbody>
         @foreach ($payments as $pay)
         <tr>
-            <td>{{ $pay->user->name }}</td>
-            <td>{{ $pay->category->name }}</td>
-            <td>Rp{{ number_format($pay->amount) }}</td>
-            <td>
-                @if($pay->verified)
-                    <span class="badge bg-success">Terverifikasi</span>
-                @else
-                    <span class="badge bg-warning text-dark">Menunggu</span>
-                @endif
-            </td>
+           <td>{{ $pay->user?->name ?? '-' }}</td>
+        <td>{{ $pay->category?->name ?? '-' }}</td>
+        <td>Rp{{ number_format($pay->amount ?? 0) }}</td>
+        <td>
+            @if($pay->verified)
+                <span class="badge bg-success">Terverifikasi</span>
+            @else
+                <span class="badge bg-warning text-dark">Menunggu</span>
+            @endif
+        </td>
+
             <td>
                 @if(!$pay->verified)
                 <form action="{{ route('payments.verify', $pay->id) }}" method="POST">

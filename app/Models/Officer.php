@@ -2,18 +2,16 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Officer extends Model
 {
-    //
-      protected $table = 'officers';
+    use HasFactory;
 
-    protected $fillable = [
-        'iduser',
-    ];
+    protected $fillable = ['iduser'];
 
-    public function user(): BelongsTo
+    public function user()
     {
         return $this->belongsTo(User::class, 'iduser');
     }

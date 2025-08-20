@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Officer;
 use App\Models\DuesCategory;
 use App\Models\DuesMember;
 use App\Models\Payment;
@@ -60,6 +61,16 @@ class DatabaseSeeder extends Seeder
             'level' => 'warga'
         
     ]);
+
+         Officer::create([
+        'iduser' => $user1->id, 
+        // rt
+    ]);
+
+        Officer::create([
+            'iduser' => $user2->id, // bendahara
+    ]);
+
            DuesCategory::create([
             'id' => 1,
             'period' => 'mingguan', 

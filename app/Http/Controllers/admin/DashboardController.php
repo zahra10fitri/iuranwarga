@@ -14,7 +14,8 @@ class DashboardController extends Controller
       $totalWarga =User::all()->count(); 
         $totalPembayaran = Payment::count();
         $totalKategori = DuesCategory::count();
-        $totalPetugas = User::where('level', 'petugas')->count(); // P besar
+        $totalPetugas = User::where('level', '!=', 'warga')->count();
+
 
         return view('admin.dashboard', compact(
             'totalWarga',

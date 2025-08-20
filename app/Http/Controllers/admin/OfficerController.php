@@ -5,13 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Officer;   // ✅ tambahin ini
+use App\Models\Payment; 
 
 class OfficerController extends Controller
 {
-    public function index()
+   public function index()
     {
-        $officers = User::where('level', 'admin')->get();
-        return view('admin.officer', compact('officers'));
+        $officers = Officer::with('user')->get();
+        $payments = Payment::with(['user'])->get();
+
+        return view('admin.officer', compact('officers', 'payments'));
     }
 
     public function create()
