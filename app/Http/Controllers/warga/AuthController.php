@@ -2,54 +2,46 @@
 
 namespace App\Http\Controllers\Warga;
 
-use App\Http\Controllers\Controller; // ✅ Tambahkan ini
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class AuthController extends Controller
-
 {
+    // tampilkan form login
     public function showLogin()
     {
         return view('login');
     }
 
+    // tampilkan form register
     public function showRegister()
     {
         return view('register');
     }
 
-public function login(Request $request)
-{
-    $request->validate([
-        'email' => 'required',
-        'password' => 'required',
-    ]);
+    // proses login
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
 
-    $login = $request->input('email'); 
-    $password = $request->input('password');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
 
-    // Cek apakah input adalah email atau username
-    $field = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+           if ($user->level === 'warga') {
+        return redirect()->to('/beranda');
+    } else {
+        // semua level selain warga dianggap petugas
+        return redirect()->to('/dashboard');
+    }
+ }
 
-    if (Auth::attempt([$field => $login, 'password' => $password])) {
-        $request->session()->regenerate();
-
-        // Cek level user setelah login
-        $user = Auth::user();
-        if ($user->level === 'admin') {
-            return redirect()->route('dashboard');
-        } else {
-            return redirect()->route('beranda');
-        }
+        return back()->with('status', 'Email atau password salah!');
     }
 
-    return back()->with('status', 'Email / Username atau Password salah!');
-}
-
-
+    // proses register
     public function register(Request $request)
     {
         $request->validate([
@@ -57,6 +49,7 @@ public function login(Request $request)
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
+            'level' => 'required|string|in:warga,petugas', // ✅ wajib pilih role
         ]);
 
         $user = User::create([
@@ -66,11 +59,25 @@ public function login(Request $request)
             'password' => Hash::make($request->password),
             'nohp' => '-',       // default
             'address' => '-',    // default
-            'level' => 'warga',  // default
+            'level' => $request->level, // ✅ simpan sesuai pilihan
         ]);
 
-        Auth::login($user); // login otomatis
+        Auth::login($user); // login otomatis setelah daftar
 
-        return redirect()->route('beranda'); // ke halaman beranda
+        if ($user->level === 'warga') {
+        return redirect()->to('/beranda');
+    } else {
+        // semua level selain warga dianggap petugas
+        return redirect()->to('/dashboard');
+}
+    }
+
+    // logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
     }
 }

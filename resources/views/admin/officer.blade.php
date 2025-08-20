@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="my-4">Data Petugas</h1>
 
-    <a href="{{ route('officer.create') }}" class="btn btn-primary mb-3">+ Tambah Petugas</a>
+    <a href="{{ route('admin.officer.create') }}" class="btn btn-primary mb-3">+ Tambah Petugas</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>
@@ -34,9 +34,9 @@
                 <td>{{ $officer->nohp }}</td>
                 <td>{{ $officer->address }}</td>
                 <td>
-                    <a href="{{ route('officer.edit', $officer->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{{ route('admin.officer.edit', $officer->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
-                    <form action="{{ route('officer.destroy', $officer->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus petugas ini?')">
+                    <form action="{{ route('admin.officer.destroy', $officer->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus petugas ini?')">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-sm btn-danger">Hapus</button>

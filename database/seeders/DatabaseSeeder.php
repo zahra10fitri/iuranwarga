@@ -19,23 +19,23 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
          
             $user1 = User::create([
-            'name' => 'pak rt',
+            'name' => 'pak agus',
             'username' => 'pakrt',
             'email' => 'adminrt@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456700',
             'address' => 'Jl. Dahlia No. 9',
-            'level' => 'admin',
+            'level' => 'rt',
     ]);
         
           $user2 = User::create([
-            'name' => 'ibu rt',
+            'name' => 'ibu rani',
             'username' => 'burt',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
             'address' => 'Jl. Kenanga No. 8',
-            'level' => 'admin'
+            'level' => 'bendahara'
 
      ]);
         
@@ -106,7 +106,7 @@ class DatabaseSeeder extends Seeder
             'iduser' => $user1->id,
             'period' => 'mingguan',
             'nominal' => 50000,
-            'petugas' => 'adminrw'
+            'petugas' => 'rt'
             
     ]);
 
@@ -114,7 +114,7 @@ class DatabaseSeeder extends Seeder
             'iduser' => $user2->id,
             'period' => 'bulanan',
             'nominal' => 50000,
-            'petugas' => 'adminrw'
+            'petugas' => 'bendahara'
             
     ]);
 

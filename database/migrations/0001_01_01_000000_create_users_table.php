@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('password');
             $table->string('nohp');              // ✅ Tambah nohp
             $table->text('address');             // ✅ Tambah alamat
-            $table->enum('level', ['warga', 'admin']); // ✅ Tambah level
+            // $table->enum('level', ['warga', 'admin']); // ✅ Tambah level
+            $table->string('level'); // bebas diisi, misalnya 'warga', 'bendahara', 'ketua', 'sekretaris', dll.
             $table->rememberToken();
             $table->timestamps();
         });

@@ -45,15 +45,14 @@
             <input type="password" name="password" class="form-control" required>
         </div>
 
-        {{-- GANTI INI --}}
         <div class="mb-3">
-            <label for="level" class="form-label">Level</label>
-            <select name="level" class="form-control" required>
-                <option value="">-- Pilih Level --</option>
-                <option value="warga">Warga</option>
-                <option value="admin">Admin</option>
-            </select>
-        </div>
+        <label for="level" class="form-label">Pilih Peran</label>
+        <select name="level" class="form-control" required>
+            <option value="warga">Warga</option>
+            <option value="petugas">Petugas</option>
+        </select>
+    </div>
+
 
         <button type="submit" class="btn btn-primary">Simpan</button>
      <a href="{{ route('admin.warga') }}" class="btn btn-secondary">Batal</a>
