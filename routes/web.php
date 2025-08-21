@@ -46,6 +46,18 @@ Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('a
  Route::post('admin/payments/{id}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
 
 
+
+
+
+// Route kategori iuran
+Route::get('/admin/categories', [DuesCategoryController::class, 'index'])->name('admin.categories');
+Route::get('/admin/categories/create', [DuesCategoryController::class, 'create'])->name('admin.categories.create');
+Route::post('/admin/categories', [DuesCategoryController::class, 'store'])->name('admin.categories.store');
+Route::get('/admin/categories/{id}/edit', [DuesCategoryController::class, 'edit'])->name('admin.categories.edit');
+Route::put('/admin/categories/{id}', [DuesCategoryController::class, 'update'])->name('admin.categories.update');
+Route::delete('/admin/categories/{id}', [DuesCategoryController::class, 'destroy'])->name('admin.categories.destroy');
+
+
 Route::post('/logout', function (Request $request) {
     Auth::logout();
     $request->session()->invalidate();

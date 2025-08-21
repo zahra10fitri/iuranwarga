@@ -10,6 +10,7 @@
             <th>Nama</th>
             <th>No HP</th>
             <th>Alamat</th>
+            <th>level</th>
             <th>Aksi</th>
         </tr>
     </thead>

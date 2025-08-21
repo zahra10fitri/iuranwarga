@@ -21,19 +21,22 @@
                 <th>Email</th>
                 <th>No HP</th>
                 <th>Alamat</th>
+                <th>level</th>
                 <th>Aksi</th>
+
             </tr>
         </thead>
         <tbody>
             @forelse ($officers as $officer)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-                <td>{{ $officer->name }}</td>
-                <td>{{ $officer->username }}</td>
-                <td>{{ $officer->email }}</td>
-                <td>{{ $officer->nohp }}</td>
-                <td>{{ $officer->address }}</td>
-                <td>
+               <td>{{ $officer->user->name }}</td>
+                <td>{{ $officer->user->username }}</td>
+                <td>{{ $officer->user->email }}</td>
+                <td>{{ $officer->user->nohp }}</td>
+                <td>{{ $officer->user->address }}</td>
+                 <td>{{ $officer->user->level }}</td>
+                  <td>
                     <a href="{{ route('admin.officer.edit', $officer->id) }}" class="btn btn-sm btn-warning">Edit</a>
 
                     <form action="{{ route('admin.officer.destroy', $officer->id) }}" method="POST" style="display:inline-block;" onsubmit="return confirm('Yakin ingin menghapus petugas ini?')">

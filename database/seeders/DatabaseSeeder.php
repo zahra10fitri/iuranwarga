@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123'),
             'nohp' => '08123456700',
             'address' => 'Jl. Dahlia No. 9',
-            'level' => 'rt',
+            'level' => 'admin',
     ]);
         
           $user2 = User::create([
@@ -117,7 +117,7 @@ class DatabaseSeeder extends Seeder
             'iduser' => $user1->id,
             'period' => 'mingguan',
             'nominal' => 50000,
-            'petugas' => 'rt'
+            'petugas' => 'admin'
             
     ]);
 

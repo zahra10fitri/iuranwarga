@@ -14,7 +14,6 @@ class OfficerController extends Controller
     {
         $officers = Officer::with('user')->get();
         $payments = Payment::with(['user'])->get();
-
         return view('admin.officer', compact('officers', 'payments'));
     }
 
