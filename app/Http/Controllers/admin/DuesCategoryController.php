@@ -3,56 +3,74 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\DuesCategory;
+use Illuminate\Http\Request;
 
 class DuesCategoryController extends Controller
 {
+    // Menampilkan semua kategori
     public function index()
     {
         $categories = DuesCategory::all();
         return view('admin.categories', compact('categories'));
     }
 
+    // Form tambah kategori
     public function create()
     {
         return view('admin.categories.create');
     }
 
+    // Simpan kategori baru
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
+            'period' => 'required|string',
+            'nominal' => 'required|numeric',
+            'status' => 'required|string',
         ]);
 
         DuesCategory::create([
-            'name' => $request->name
+            'period' => $request->period,
+            'nominal' => $request->nominal,
+            'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Kategori berhasil ditambahkan.');
+        return redirect()->route('admin.categories')->with('success', 'Kategori berhasil ditambahkan.');
     }
 
-    public function edit(DuesCategory $category)
+    // Form edit kategori
+    public function edit($id)
     {
+        $category = DuesCategory::findOrFail($id);
         return view('admin.categories.edit', compact('category'));
     }
 
-    public function update(Request $request, DuesCategory $category)
+    // Update kategori
+    public function update(Request $request, $id)
     {
         $request->validate([
-            'name' => 'required|string|max:100',
+            'period' => 'required|string',
+            'nominal' => 'required|numeric',
+            'status' => 'required|string',
         ]);
 
+        $category = DuesCategory::findOrFail($id);
         $category->update([
-            'name' => $request->name
+            'period' => $request->period,
+            'nominal' => $request->nominal,
+            'status' => $request->status,
         ]);
 
-        return redirect()->route('admin.categories')->with('success', 'Kategori berhasil diupdate.');
+        return redirect()->route('admin.categories')->with('success', 'Kategori berhasil diperbarui.');
     }
 
-    public function destroy(DuesCategory $category)
+    // Hapus kategori
+    public function destroy($id)
     {
+        $category = DuesCategory::findOrFail($id);
         $category->delete();
+
         return redirect()->route('admin.categories')->with('success', 'Kategori berhasil dihapus.');
     }
 }
