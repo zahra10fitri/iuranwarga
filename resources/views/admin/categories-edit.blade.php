@@ -32,7 +32,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('admin.categories.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.categories') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

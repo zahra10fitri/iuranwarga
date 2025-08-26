@@ -13,7 +13,7 @@ class PaymentController extends Controller
     public function index()
     {
         $payments = Payment::with(['user', 'category'])->latest()->get();
-        return view('admin.payment.index', compact('payments'));
+        return view('admin.payment', compact('payments'));
     }
 
     public function verify($id)
@@ -30,7 +30,7 @@ class PaymentController extends Controller
         $users = User::where('level', 'warga')->get();
         $categories = DuesCategory::all();
 
-        return view('admin.payment.create', compact('users', 'categories'));
+        return view('admin.payment-create', compact('users', 'categories'));
     }
 
     public function store(Request $request)

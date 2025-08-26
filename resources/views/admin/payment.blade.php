@@ -1,41 +1,32 @@
 @extends('admin.template')
 
 @section('content')
-<h3 class="mb-4">Verifikasi Pembayaran</h3>
+<h3 class="mb-4">Daftar Pembayaran</h3>
+<a href="{{ route('admin.payments-create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
 
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th>Nama</th>
-            <th>Kategori</th>
-            <th>Jumlah</th>
-            <th>Status</th>
-            <th>Tindakan</th>
+            <th>Nama Warga</th>
+            <th>Periode</th>
+            <th>Nominal</th>
+            <th>Petugas</th>
+            <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($payments as $pay)
+        @foreach ($payments as $payment)
         <tr>
-           <td>{{ $pay->user?->name ?? '-' }}</td>
-        <td>{{ $pay->category?->name ?? '-' }}</td>
-        <td>Rp{{ number_format($pay->amount ?? 0) }}</td>
-        <td>
-            @if($pay->verified)
-                <span class="badge bg-success">Terverifikasi</span>
-            @else
-                <span class="badge bg-warning text-dark">Menunggu</span>
-            @endif
-        </td>
-
+            <td>{{ $payment->user?->name ?? '-' }}</td>
+            <td>{{ ucfirst($payment->period) }}</td>
+            <td>Rp{{ number_format($payment->nominal, 0, ',', '.') }}</td>
+            <td>{{ $payment->petugas }}</td>
             <td>
-                @if(!$pay->verified)
-                <form action="{{ route('payments.verify', $pay->id) }}" method="POST">
-                    @csrf @method('PATCH')
-                    <button class="btn btn-sm btn-success">Verifikasi</button>
+                <a href="{{ route('admin.payments.edit', $payment->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                <form action="{{ route('admin.payments.destroy', $payment->id) }}" method="POST" class="d-inline">
+                    @csrf @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus pembayaran ini?')">Hapus</button>
                 </form>
-                @else
-                <em>-</em>
-                @endif
             </td>
         </tr>
         @endforeach

@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
             Payment::create([
             'iduser' => $user1->id,
             'period' => 'mingguan',
-            'nominal' => 50000,
+            'nominal' => 15000,
             'petugas' => 'admin'
             
     ]);
@@ -126,6 +126,23 @@ class DatabaseSeeder extends Seeder
             'period' => 'bulanan',
             'nominal' => 50000,
             'petugas' => 'bendahara'
+            
+    ]);
+
+    
+            Payment::create([
+            'iduser' => $user3->id,
+            'period' => 'mingguan',
+            'nominal' => 15000,
+            'petugas' => 'warga'
+            
+    ]);
+
+            Payment::create([
+            'iduser' => $user4->id,
+            'period' => 'tahunan',
+            'nominal' => 600000,
+            'petugas' => 'warga'
             
     ]);
 

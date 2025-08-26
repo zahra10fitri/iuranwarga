@@ -18,7 +18,7 @@ class DuesCategoryController extends Controller
     // Form tambah kategori
     public function create()
     {
-        return view('admin.categories.create');
+        return view('admin.categories-create');
     }
 
     // Simpan kategori baru
@@ -43,7 +43,7 @@ class DuesCategoryController extends Controller
     public function edit($id)
     {
         $category = DuesCategory::findOrFail($id);
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.categories-edit', compact('category'));
     }
 
     // Update kategori

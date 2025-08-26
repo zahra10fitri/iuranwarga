@@ -1,29 +1,41 @@
 @extends('admin.template')
 
 @section('content')
-<h3 class="mb-4">Catat Iuran Warga</h3>
-<form action="{{ route('payments.store') }}" method="POST">
+<h3 class="mb-4">Tambah Pembayaran</h3>
+
+<form action="{{ route('admin.payments.store') }}" method="POST">
     @csrf
+
     <div class="mb-3">
-        <label for="user_id" class="form-label">Warga</label>
-        <select name="user_id" id="user_id" class="form-select" required>
-            @foreach($wargas as $warga)
-                <option value="{{ $warga->id }}">{{ $warga->name }}</option>
+        <label for="iduser" class="form-label">Nama Warga</label>
+        <select name="iduser" id="iduser" class="form-control" required>
+            <option value="">-- Pilih Warga --</option>
+            @foreach ($users as $user)
+                <option value="{{ $user->id }}">{{ $user->name }}</option>
             @endforeach
         </select>
     </div>
+
     <div class="mb-3">
-        <label for="category_id" class="form-label">Kategori Iuran</label>
-        <select name="category_id" id="category_id" class="form-select" required>
-            @foreach($categories as $cat)
-                <option value="{{ $cat->id }}">{{ $cat->name }}</option>
-            @endforeach
+        <label for="period" class="form-label">Periode</label>
+        <select name="period" id="period" class="form-control" required>
+            <option value="mingguan">Mingguan</option>
+            <option value="bulanan">Bulanan</option>
+            <option value="tahunan">Tahunan</option>
         </select>
     </div>
+
     <div class="mb-3">
-        <label for="amount" class="form-label">Jumlah</label>
-        <input type="number" name="amount" class="form-control" required>
+        <label for="nominal" class="form-label">Nominal</label>
+        <input type="number" name="nominal" id="nominal" class="form-control" required>
     </div>
-    <button type="submit" class="btn btn-success">Catat Iuran</button>
+
+    <div class="mb-3">
+        <label for="petugas" class="form-label">Petugas</label>
+        <input type="text" name="petugas" id="petugas" class="form-control" value="warga" required>
+    </div>
+
+    <button type="submit" class="btn btn-success">Simpan</button>
+    <a href="{{ route('admin.payments') }}" class="btn btn-secondary">Batal</a>
 </form>
 @endsection
