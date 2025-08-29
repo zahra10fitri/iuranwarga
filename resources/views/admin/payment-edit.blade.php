@@ -3,7 +3,7 @@
 @section('content')
 <h3 class="mb-4">Edit Pembayaran</h3>
 
-<form action="{{ route('admin.payments.update', $payment->id) }}" method="POST">
+<form action="{{ route('admin.payment.update', $payment->id) }}" method="POST">
     @csrf @method('PUT')
 
     <div class="mb-3">
@@ -37,6 +37,6 @@
     </div>
 
     <button type="submit" class="btn btn-success">Update</button>
-    <a href="{{ route('admin.payments') }}" class="btn btn-secondary">Batal</a>
+    <a href="{{ route('admin.payment') }}" class="btn btn-secondary">Batal</a>
 </form>
 @endsection

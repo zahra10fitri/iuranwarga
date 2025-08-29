@@ -22,7 +22,7 @@ class DatabaseSeeder extends Seeder
             $user1 = User::create([
             'name' => 'pak agus',
             'username' => 'pakrt',
-            'email' => 'adminrt@gmail.com',
+            'email' => 'admin@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456700',
             'address' => 'Jl. Dahlia No. 9',
@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
           $user2 = User::create([
             'name' => 'ibu rani',
             'username' => 'burt',
-            'email' => 'admin@gmail.com',
+            'email' => 'bendahara@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
             'address' => 'Jl. Kenanga No. 8',
@@ -125,7 +125,8 @@ class DatabaseSeeder extends Seeder
             'iduser' => $user2->id,
             'period' => 'bulanan',
             'nominal' => 50000,
-            'petugas' => 'bendahara'
+            'petugas' => 'bendahara',
+            'status' => 'verified'
             
     ]);
 
@@ -142,7 +143,8 @@ class DatabaseSeeder extends Seeder
             'iduser' => $user4->id,
             'period' => 'tahunan',
             'nominal' => 600000,
-            'petugas' => 'warga'
+            'petugas' => 'warga',
+            'status' => 'verified'
             
     ]);
 

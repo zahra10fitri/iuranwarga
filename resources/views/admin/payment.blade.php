@@ -1,8 +1,9 @@
 @extends('admin.template')
 
 @section('content')
-<h3 class="mb-4">Daftar Pembayaran</h3>
-<a href="{{ route('admin.payments-create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
+<h3 class="mb-4">Daftar Pembayaran (Belum Dibayar)</h3>
+<a href="{{ route('admin.payment.create') }}" class="btn btn-primary mb-3">Tambah Pembayaran</a>
+<a href="{{ route('admin.payment.verified') }}" class="btn btn-success mb-3">Lihat Sudah Dibayar</a>
 
 <table class="table table-bordered">
     <thead>
@@ -11,25 +12,30 @@
             <th>Periode</th>
             <th>Nominal</th>
             <th>Petugas</th>
+            <th>Status</th>
             <th>Aksi</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($payments as $payment)
+        @forelse ($payments as $payment)
         <tr>
             <td>{{ $payment->user?->name ?? '-' }}</td>
             <td>{{ ucfirst($payment->period) }}</td>
             <td>Rp{{ number_format($payment->nominal, 0, ',', '.') }}</td>
             <td>{{ $payment->petugas }}</td>
+            <td><span class="badge bg-warning text-dark">Belum Dibayar</span></td>
             <td>
-                <a href="{{ route('admin.payments.edit', $payment->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                <form action="{{ route('admin.payments.destroy', $payment->id) }}" method="POST" class="d-inline">
-                    @csrf @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus pembayaran ini?')">Hapus</button>
+                <form action="{{ route('admin.payment.verify', $payment->id) }}" method="POST" class="d-inline">
+                    @csrf
+                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Verifikasi pembayaran ini?')">
+                        Verify
+                    </button>
                 </form>
             </td>
         </tr>
-        @endforeach
+        @empty
+        <tr><td colspan="6" class="text-center">Tidak ada data</td></tr>
+        @endforelse
     </tbody>
 </table>
 @endsection

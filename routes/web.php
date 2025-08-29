@@ -43,8 +43,18 @@ Route::get('/admin/warga/{id}/edit', [WargaController::class, 'edit'])->name('ad
 Route::put('/admin/warga/{id}', [WargaController::class, 'update'])->name('admin.warga.update');
 Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
 
- Route::post('admin/payments/{id}/verify', [PaymentController::class, 'verify'])->name('payments.verify');
 
+Route::get('/verified', [PaymentController::class, 'verified'])->name('admin.payment.verified');
+Route::post('admin/payment/{id}/verify', [PaymentController::class, 'verify'])->name('admin.payment.verify');
+Route::get('/admin/payment', [PaymentController::class, 'index'])->name('admin.payment');
+Route::get('/admin/payment/create', [PaymentController::class, 'create'])->name('admin.payment.create');
+Route::post('/admin/payment', [PaymentController::class, 'store'])->name('admin.payment.store');
+Route::get('/admin/payment/{id}/edit', [PaymentController::class, 'edit'])->name('admin.payment.edit');
+Route::put('/admin/payment/{id}', [PaymentController::class, 'update'])->name('admin.payment.update');
+Route::delete('/admin/payment/{id}', [PaymentController::class, 'destroy'])->name('admin.payment.destroy');
+
+// Verifikasi pembayaran
+// Route::patch('/admin/payment/{id}/verify', [PaymentController::class, 'verify'])->name('admin.payment.verify');
 
 
 

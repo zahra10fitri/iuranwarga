@@ -17,6 +17,8 @@ return new class extends Migration
             $table->enum('period', ['mingguan', 'bulanan', 'tahunan']);
             $table->integer('nominal');
             $table->string('petugas');
+            $table->enum('status', ['belum bayar', 'verified'])->default('belum bayar');
+
             $table->timestamps();
         });
     }

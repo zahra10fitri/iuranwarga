@@ -10,27 +10,37 @@ use App\Models\DuesCategory;
 
 class PaymentController extends Controller
 {
-    public function index()
-    {
-        $payments = Payment::with(['user', 'category'])->latest()->get();
-        return view('admin.payment', compact('payments'));
-    }
+   public function index()
+{
+    // Halaman untuk pembayaran belum bayar
+    $payments = Payment::where('status', 'belum_bayar')->get();
+    return view('admin.payment', compact('payments'));
+}
 
-    public function verify($id)
-    {
-        $payment = Payment::findOrFail($id);
-        $payment->status = 'verified';
-        $payment->save();
+public function verified()
+{
+    // Halaman untuk pembayaran yang sudah diverifikasi
+    $payments = Payment::where('status', 'sudah_bayar')->get();
+    return view('admin.payment.verified', compact('payments'));
+}
 
-        return redirect()->route('payments.index')->with('success', 'Pembayaran berhasil diverifikasi.');
-    }
+
+   public function verify($id)
+{
+    $payment = Payment::findOrFail($id);
+    $payment->status = 'verified';
+    $payment->save();
+
+    return redirect()->route('admin.payment')->with('success', 'Pembayaran berhasil diverifikasi!');
+}
+
 
     public function create()
     {
         $users = User::where('level', 'warga')->get();
         $categories = DuesCategory::all();
 
-        return view('admin.payment-create', compact('users', 'categories'));
+        return view('admin.payment.create', compact('users', 'categories'));
     }
 
     public function store(Request $request)
