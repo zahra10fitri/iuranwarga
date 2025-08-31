@@ -11,17 +11,46 @@ use App\Http\Controllers\Admin\DuesCategoryController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\OfficerController;
 
-
-
-// Halaman beranda (hanya bisa diakses setelah login)
-Route::get('/', [BerandaController::class, 'index'])->name('beranda');
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
+// ===================== AUTH =====================
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+// ===================== WARGA =====================
+Route::middleware(['auth'])->group(function () {
+    Route::get('/beranda', function () {
+        return view('warga.dashboard'); // ✅ Halaman dashboard warga
+    })->name('warga.dashboard');
+});
+
+// ===================== ADMIN =====================
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+});
+
+// Route::middleware(['auth', 'warga'])->group(function () {
+//     Route::get('/warga/dashboard', [WargaDashboardController::class, 'index'])->name('warga.dashboard');
+// });
+
+
+// // Halaman beranda (hanya bisa diakses setelah login)
+
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [AuthController::class, 'login']);
+// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+// Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+// Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
+Route::get('/', [BerandaController::class, 'index'])->name('beranda');
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/admin/categories', [DuesCategoryController::class, 'index'])->name('admin.categories');
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga');
@@ -35,7 +64,16 @@ Route::get('/admin/payment', [PaymentController::class, 'index'])->name('admin.p
     Route::put('/admin/officer/{id}', [OfficerController::class, 'update'])->name('admin.officer.update');
     Route::delete('/admin/officer/{id}', [OfficerController::class, 'destroy'])->name('admin.officer.destroy');
 
-// Tampilkan daftar warga
+
+//     Route::middleware(['auth', 'admin'])->group(function () {
+//     Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga.index');
+//     Route::get('/admin/warga/create', [WargaController::class, 'create'])->name('admin.warga.create');
+//     Route::post('/admin/warga', [WargaController::class, 'store'])->name('admin.warga.store');
+//     Route::get('/admin/warga/{id}/edit', [WargaController::class, 'edit'])->name('admin.warga.edit');
+//     Route::put('/admin/warga/{id}', [WargaController::class, 'update'])->name('admin.warga.update');
+//     Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
+// });
+
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga.index');
 Route::get('/admin/warga/create', [WargaController::class, 'create'])->name('admin.warga.create');
 Route::post('/admin/warga', [WargaController::class, 'store'])->name('admin.warga.store');
@@ -43,15 +81,19 @@ Route::get('/admin/warga/{id}/edit', [WargaController::class, 'edit'])->name('ad
 Route::put('/admin/warga/{id}', [WargaController::class, 'update'])->name('admin.warga.update');
 Route::delete('/admin/warga/{id}', [WargaController::class, 'destroy'])->name('admin.warga.destroy');
 
+Route::post('/admin/payment', [PaymentController::class, 'store'])->name('admin.payment.store');
 
 Route::get('/verified', [PaymentController::class, 'verified'])->name('admin.payment.verified');
 Route::post('admin/payment/{id}/verify', [PaymentController::class, 'verify'])->name('admin.payment.verify');
 Route::get('/admin/payment', [PaymentController::class, 'index'])->name('admin.payment');
 Route::get('/admin/payment/create', [PaymentController::class, 'create'])->name('admin.payment.create');
-Route::post('/admin/payment', [PaymentController::class, 'store'])->name('admin.payment.store');
 Route::get('/admin/payment/{id}/edit', [PaymentController::class, 'edit'])->name('admin.payment.edit');
 Route::put('/admin/payment/{id}', [PaymentController::class, 'update'])->name('admin.payment.update');
 Route::delete('/admin/payment/{id}', [PaymentController::class, 'destroy'])->name('admin.payment.destroy');
+// Route::post('/admin/payment/store', [PaymentController::class, 'store'])->name('admin.payment.store');
+Route::get('/admin/payment/{id}/show', [PaymentController::class, 'show'])->name('admin.payment.show');
+Route::post('/admin/payment/{id}/complete', [PaymentController::class, 'complete'])->name('admin.payment.complete');
+Route::get('/admin/payment/search-user', [PaymentController::class, 'searchUser'])->name('admin.payment.searchUser');
 
 // Verifikasi pembayaran
 // Route::patch('/admin/payment/{id}/verify', [PaymentController::class, 'verify'])->name('admin.payment.verify');

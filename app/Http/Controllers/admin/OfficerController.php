@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
-use App\Models\Officer;   // ✅ tambahin ini
+use App\Models\Officer;  
 use App\Models\Payment; 
 
 class OfficerController extends Controller
@@ -19,7 +19,7 @@ class OfficerController extends Controller
 
     public function create()
     {
-        return view('admin.officer.create');
+        return view('admin.officer-create');
     }
 
     public function store(Request $request)

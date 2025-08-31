@@ -2,7 +2,7 @@
 
 @section('content')
 <h3 class="mb-4">Daftar Pembayaran (Sudah Dibayar)</h3>
-<a href="{{ route('admin.payment.index') }}" class="btn btn-warning mb-3">Lihat Belum Dibayar</a>
+<a href="{{ route('admin.payment') }}" class="btn btn-warning mb-3">Lihat Belum Dibayar</a>
 
 <table class="table table-bordered">
     <thead>

@@ -10,38 +10,43 @@ use App\Models\User;
 
 class AuthController extends Controller
 {
-    // tampilkan form login
+    // Tampilkan form login
     public function showLogin()
     {
         return view('login');
     }
 
-    // tampilkan form register
+    // Tampilkan form register
     public function showRegister()
     {
         return view('register');
     }
 
-    // proses login
+    // Proses login
     public function login(Request $request)
     {
-        $credentials = $request->only('email', 'password');
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
 
-        if (Auth::attempt($credentials)) {
+        // Bisa login pakai email atau username
+        $loginField = filter_var($request->email, FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        if (Auth::attempt([$loginField => $request->email, 'password' => $request->password])) {
             $user = Auth::user();
 
-           if ($user->level === 'warga') {
-        return redirect()->to('/beranda');
-    } else {
-        // semua level selain warga dianggap petugas
-        return redirect()->to('/dashboard');
-    }
- }
+            if ($user->level === 'warga') {
+                return redirect()->route('warga.dashboard');
+            } else {
+                return redirect()->route('admin.dashboard');
+            }
+        }
 
-        return back()->with('status', 'Email atau password salah!');
+        return back()->with('status', 'Email/Username atau password salah!');
     }
 
-    // proses register
+    // Proses register
     public function register(Request $request)
     {
         $request->validate([
@@ -49,7 +54,7 @@ class AuthController extends Controller
             'username' => 'required|string|max:255|unique:users,username',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
-            'level' => 'required|string|in:warga,petugas', // ✅ wajib pilih role
+            'level' => 'required|string|in:warga,petugas',
         ]);
 
         $user = User::create([
@@ -59,25 +64,24 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
             'nohp' => '-',       // default
             'address' => '-',    // default
-            'level' => $request->level, // ✅ simpan sesuai pilihan
+            'level' => $request->level,
         ]);
 
-        Auth::login($user); // login otomatis setelah daftar
+        Auth::login($user); // Login otomatis setelah daftar
 
         if ($user->level === 'warga') {
-        return redirect()->to('/beranda');
-    } else {
-        // semua level selain warga dianggap petugas
-        return redirect()->to('/dashboard');
-}
+            return redirect()->route('warga.dashboard');
+        } else {
+            return redirect()->route('admin.dashboard');
+        }
     }
 
-    // logout
+    // Logout
     public function logout(Request $request)
     {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('/login');
+        return redirect()->route('login');
     }
 }
