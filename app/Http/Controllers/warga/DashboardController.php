@@ -1,27 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\warga;
+namespace App\Http\Controllers\Warga;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 use App\Models\Payment;
-use App\Models\DuesMember;
+use App\Models\DuesCategory;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
+        $totalWarga = User::count();
+        $totalPembayaran = Payment::count();
+        $totalKategori = DuesCategory::count();
+        $totalPetugas = User::where('level', '!=', 'warga')->count();
 
-        // total pembayaran iuran warga ini
-        $totalPembayaran = Payment::where('iduser', $user->id)->sum('amount');
-
-        // total kategori iuran yang harus dibayar
-        $totalIuran = DuesMember::where('iduser', $user->id)->count();
-
-        // total pembayaran yang sudah lunas
-        $lunas = Payment::where('iduser', $user->id)->where('status', 'lunas')->count();
-
-        return view('warga.dashboard', compact('user', 'totalPembayaran', 'totalIuran', 'lunas'));
+        return view('warga.dashboard', compact(
+            'totalWarga',
+            'totalPembayaran',
+            'totalKategori',
+            'totalPetugas'
+        ));
     }
 }

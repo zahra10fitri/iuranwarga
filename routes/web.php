@@ -11,41 +11,30 @@ use App\Http\Controllers\Admin\DuesCategoryController;
 use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\OfficerController;
 
-// ===================== AUTH =====================
-Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+use App\Http\Controllers\warga\DashboardController as WargaDashboardController;
 
-Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
 
+
+// untuk warga
+Route::get('/warga/dashboard', [App\Http\Controllers\Warga\DashboardController::class, 'index'])
+    ->name('warga.dashboard')
+    ->middleware('auth');
+
+// untuk admin
+Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardController::class, 'index'])
+    ->name('admin.dashboard')
+    ->middleware('auth');
+
+
+// Halaman beranda (hanya bisa diakses setelah login)
+
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// ===================== WARGA =====================
-Route::middleware(['auth'])->group(function () {
-    Route::get('/beranda', function () {
-        return view('warga.dashboard'); // ✅ Halaman dashboard warga
-    })->name('warga.dashboard');
-});
 
-// ===================== ADMIN =====================
-Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-});
-
-// Route::middleware(['auth', 'warga'])->group(function () {
-//     Route::get('/warga/dashboard', [WargaDashboardController::class, 'index'])->name('warga.dashboard');
-// });
-
-
-// // Halaman beranda (hanya bisa diakses setelah login)
-
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [AuthController::class, 'login']);
-// Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
-// Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-// Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register'])->name('register.submit');
