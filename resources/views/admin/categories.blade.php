@@ -2,10 +2,10 @@
 
 @section('content')
 <h3 class="mb-4">Kategori Iuran</h3>
-<a href="{{ route('admin.categories.create') }}" class="btn btn-primary mb-3">Tambah Kategori</a>
+<!-- <a href="{{ route('admin.categories.create') }}" class="btn btn-primary mb-3">Tambah Kategori</a> -->
 
 <table class="table table-bordered">
-   <thead>
+   <thead class="table-dark">  
     <tr>
         <th>Periode</th>
         <th>Nominal</th>

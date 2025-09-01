@@ -15,19 +15,19 @@
            class="btn {{ request()->routeIs('admin.payment.verified') ? 'btn-dark' : 'btn-success' }}">
            Sudah Bayar
         </a>
-        <a href="{{ route('admin.payment.create') }}" class="btn btn-primary">
+        <a href="{{ route('admin.payment.create') }}" class="btn btn-warning">
             Tambah Pembayaran
         </a>
     </div>
 </div>
 
 <table class="table table-bordered">
-    <thead>
+     <thead class="table-dark">  
         <tr>
             <th>Nama Warga</th>
             <th>Periode</th>
             <th>Nominal</th>
-            <th>Petugas</th>
+            <th>Level</th>
             <th>Status</th>
             <th>Aksi</th>
         </tr>

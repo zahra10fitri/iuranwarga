@@ -30,10 +30,15 @@ public function login(Request $request)
     if (Auth::attempt($credentials)) {
         $user = Auth::user();
 
-        if ($user->level === 'warga') {
-            return redirect()->route('warga.dashboard');  // ✅ ke dashboard warga
+        // Arahkan sesuai level user
+        if ($user->level === 'bendahara') {
+            return redirect()->route('admin.payment');
+        } elseif ($user->level === 'admin') {
+            return redirect()->route('admin.warga'); // ke data warga
+        } elseif ($user->level === 'warga') {
+            return redirect()->route('warga.dashboard');
         } else {
-            return redirect()->route('admin.dashboard');  // ✅ ke dashboard admin/petugas
+            return redirect('/'); // fallback
         }
     }
 
@@ -70,62 +75,36 @@ public function register(Request $request)
     }
 }
 
-    // proses login
-//     public function login(Request $request)
-//     {
-//         $credentials = $request->only('email', 'password');
 
-//         if (Auth::attempt($credentials)) {
-//             $user = Auth::user();
+// app/Http/Controllers/Auth/LoginController.php
 
-//            if ($user->level === 'warga') {
-//         return redirect()->to('/beranda');
-//     } else {
-//         // semua level selain warga dianggap petugas
-//         return redirect()->to('/dashboard');
-//     }
-//  }
+protected function redirectTo()
+{
+    $user = auth()->user();
 
-//         return back()->with('status', 'Email atau password salah!');
-//     }
+    if ($user->level === 'bendahara') {
+        return route('admin.payment'); // Bendahara ke halaman pembayaran
+    }
 
-//     // proses register
-//     public function register(Request $request)
-//     {
-//         $request->validate([
-//             'name' => 'required|string|max:255',
-//             'username' => 'required|string|max:255|unique:users,username',
-//             'email' => 'required|email|max:255|unique:users,email',
-//             'password' => 'required|string|min:6|confirmed',
-//             'level' => 'required|string|in:warga,petugas', // ✅ wajib pilih role
-//         ]);
+    if ($user->level === 'admin') {
+        return route('admin.warga.index'); // Admin ke data warga
+    }
 
-//         $user = User::create([
-//             'name' => $request->name,
-//             'username' => $request->username,
-//             'email' => $request->email,
-//             'password' => Hash::make($request->password),
-//             'nohp' => '-',       // default
-//             'address' => '-',    // default
-//             'level' => $request->level, // ✅ simpan sesuai pilihan
-//         ]);
+    if ($user->level === 'warga') {
+        return route('warga.dashboard'); // Warga ke dashboard warga
+    }
 
-//         Auth::login($user); // login otomatis setelah daftar
+    return '/'; // fallback
+}
 
-//         if ($user->level === 'warga') {
-//         return redirect()->to('/beranda');
-//     } else {
-//         // semua level selain warga dianggap petugas
-//         return redirect()->to('/dashboard');
+
+
+// public function logout(Request $request)
+// {
+//     Auth::logout();
+//     $request->session()->invalidate();
+//     $request->session()->regenerateToken();
+//     return redirect('/login');
 // }
-//     }
-
-//     // logout
-//     public function logout(Request $request)
-//     {
-//         Auth::logout();
-//         $request->session()->invalidate();
-//         $request->session()->regenerateToken();
-//         return redirect('/login');
-//     }
+ 
 }

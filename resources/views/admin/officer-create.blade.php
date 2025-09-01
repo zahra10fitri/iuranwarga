@@ -44,6 +44,6 @@
     </div>
 
     <button type="submit" class="btn btn-primary">Simpan</button>
-    <a href="{{ route('admin.officer.index') }}" class="btn btn-secondary">Batal</a>
+    <a href="{{ route('admin.officer') }}" class="btn btn-secondary">Batal</a>
 </form>
 @endsection

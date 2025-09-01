@@ -13,8 +13,8 @@
         }
         .sidebar {
             width: 220px;
-            background-color: #343a40;
-            color: white;
+            background-color: #000000ff;
+            color: black;
             flex-shrink: 0;
         }
         .sidebar a {
@@ -33,7 +33,8 @@
             text-align: center;
             padding: 15px 0;
             font-weight: bold;
-            background-color: #212529;
+            background-color: #febd0aff;
+
            
         }
     </style>
@@ -42,11 +43,11 @@
 
 <div class="sidebar">
     <div class="logo">Iuran Warga</div>
-    <a href="{{ route('dashboard') }}"><i class="fas fa-home me-2"></i> Dashboard</a>
+    <a href="{{ route('dashboard') }}"><i class="fas fa-home me-2 "></i> Dashboard</a>
     <a href="{{ route('admin.warga') }}"><i class="fas fa-users me-2"></i> Data Warga</a>
-    <a href="{{ route('admin.payment') }}"><i class="fas fa-money-bill-wave me-2"></i> Pembayaran</a>
-    <a href="{{ route('admin.categories') }}"><i class="fas fa-layer-group me-2"></i> Kategori Iuran</a>
-    <a href="{{ route('admin.officer') }}"><i class="fas fa-user-shield me-2"></i> Data Officer</a>
+    <a href="{{ route('admin.payment') }}"><i class="fas fa-money-bill-wave me-2 "></i> Pembayaran</a>
+    <a href="{{ route('admin.categories') }}"><i class="fas fa-layer-group me-2 "></i> Kategori Iuran</a>
+    <a href="{{ route('admin.officer') }}"><i class="fas fa-user-shield me-2 "></i> Data Officer</a>
 </div>
 
 <div class="content">

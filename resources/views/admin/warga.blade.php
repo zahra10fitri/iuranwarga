@@ -2,10 +2,10 @@
 
 @section('content')
 <h3 class="mb-4">Data Warga</h3>
-<a href="{{ route('admin.warga.create') }}" class="btn btn-primary mb-3">Tambah Warga</a>
+<a href="{{ route('admin.warga.create') }}" class="btn btn-warning mb-3">Tambah Warga</a>
 
 <table class="table table-bordered">
-    <thead>
+      <thead class="table-dark">  
         <tr>
             <th>Nama</th>
             <th>No HP</th>

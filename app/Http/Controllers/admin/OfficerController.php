@@ -43,7 +43,7 @@ class OfficerController extends Controller
             'level'    => 'admin',
         ]);
 
-        return redirect()->route('officer.index')->with('success', 'Petugas berhasil ditambahkan');
+        return redirect()->route('admin.officer')->with('success', 'Petugas berhasil ditambahkan');
     }
 
     public function edit($id)
@@ -72,7 +72,7 @@ class OfficerController extends Controller
             'address'  => $request->address,
         ]);
 
-        return redirect()->route('officer.index')->with('success', 'Petugas berhasil diperbarui');
+        return redirect()->route('admin.officer')->with('success', 'Petugas berhasil diperbarui');
     }
 
     public function destroy($id)
@@ -80,6 +80,6 @@ class OfficerController extends Controller
         $officer = User::findOrFail($id);
         $officer->delete();
 
-        return redirect()->route('officer.index')->with('success', 'Petugas berhasil dihapus');
+        return redirect()->route('admin.officer')->with('success', 'Petugas berhasil dihapus');
     }
 }

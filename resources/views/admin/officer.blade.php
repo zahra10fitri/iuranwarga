@@ -6,7 +6,7 @@
 <div class="container">
     <h1 class="my-4">Data Petugas</h1>
 
-    <a href="{{ route('admin.officer.create') }}" class="btn btn-primary mb-3">+ Tambah Petugas</a>
+    <a href="{{ route('admin.officer.create') }}" class="btn btn-warning mb-3">+ Tambah Petugas</a>
 
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

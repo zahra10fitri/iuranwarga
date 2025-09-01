@@ -8,42 +8,55 @@
         <p class="text-muted">Ini adalah dashboard iuran warga Anda</p>
     </div>
 
+    <!-- Row utama -->
     <div class="row justify-content-center">
-        <!-- Total Warga -->
-        <div class="col-md-4">
-            <div class="card text-white bg-success mb-3 shadow-sm">
+        <!-- Data Warga -->
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="card text-white bg-success shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
                         <h4 class="card-title mb-0">{{ $totalWarga }}</h4>
-                        <small>Total Warga</small>
+                        <small>Data Warga</small>
                     </div>
                     <i class="fas fa-users fa-2x opacity-75"></i>
+                </div>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.warga') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
 
         <!-- Total Pembayaran Keseluruhan -->
-        <div class="col-md-4">
-            <div class="card text-white bg-primary mb-3 shadow-sm">
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="card text-white bg-primary shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h4 class="card-title mb-0">{{ $totalPembayaran }}</h4>
-                        <small>Total Pembayaran Keseluruhan</small>
+                        <h4 class="card-title mb-0">
+                            Rp {{ number_format($totalPembayaran, 0, ',', '.') }}
+                        </h4>
+                        <small>Total Pembayaran Masuk</small>
                     </div>
                     <i class="fas fa-money-bill-wave fa-2x opacity-75"></i>
                 </div>
+                <div class="card-footer bg-transparent border-top-0 text-end">
+                    <a href="{{ route('admin.payment') }}" class="text-white text-decoration-none">
+                        Lihat <i class="fas fa-arrow-circle-right"></i>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
         <!-- (Opsional) Total pembayaran saya -->
         @isset($pembayaranSaya)
-        <div class="col-md-4">
-            <div class="card text-white bg-info mb-3 shadow-sm">
+        <div class="col-md-4 col-lg-3 mb-3">
+            <div class="card text-white bg-info shadow-sm h-100">
                 <div class="card-body d-flex justify-content-between align-items-center">
                     <div>
-                        <h4 class="card-title mb-0">{{ $pembayaranSaya }}</h4>
+                        <h4 class="card-title mb-0">
+                            Rp {{ number_format($pembayaranSaya, 0, ',', '.') }}
+                        </h4>
                         <small>Pembayaran Saya</small>
                     </div>
                     <i class="fas fa-wallet fa-2x opacity-75"></i>

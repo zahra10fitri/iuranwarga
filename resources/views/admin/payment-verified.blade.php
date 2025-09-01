@@ -5,12 +5,12 @@
 <a href="{{ route('admin.payment') }}" class="btn btn-warning mb-3">Lihat Belum Dibayar</a>
 
 <table class="table table-bordered">
-    <thead>
+     <thead class="table-dark">  
         <tr>
             <th>Nama Warga</th>
             <th>Periode</th>
             <th>Nominal</th>
-            <th>Petugas</th>
+            <th>Level</th>
             <th>Status</th>
         </tr>
     </thead>
