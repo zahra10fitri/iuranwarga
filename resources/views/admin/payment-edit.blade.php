@@ -1,4 +1,4 @@
-@extends('admin.template')
+@extends('officer.template')
 
 @section('content')
 <h3 class="mb-4">Edit Pembayaran</h3>

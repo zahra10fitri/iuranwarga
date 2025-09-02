@@ -1,10 +1,11 @@
-@extends('admin.template')
+@extends('officer.template')
+
 
 @section('content')
 <h3 class="mb-4">
     @if (request()->routeIs('admin.payment.verified'))
         Daftar Pembayaran <span class="text-success">Sudah Bayar</span>
-    @elseif (request()->routeIs('admin.payment.unverified'))
+    @elseif (request()->routeIs('admin.payment'))
         Daftar Pembayaran <span class="text-warning">Belum Bayar</span>
     @endif
 </h3>
@@ -48,15 +49,30 @@
             </td>
             <td>
                 @if($payment->status !== 'verified')
-                <form action="{{ route('admin.payment.verify', $payment->id) }}" method="POST" class="d-inline">
+                    {{-- Tombol Verify --}}
+                    <form action="{{ route('admin.payment.verify', $payment->id) }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Verifikasi pembayaran ini?')">
+                            Verify
+                        </button>
+                    </form>
+                @else
+                    <span class="text-muted">✔ Sudah Diverifikasi</span>
+                @endif
+
+                {{-- Tombol Edit --}}
+                <a href="{{ route('admin.payment.edit', $payment->id) }}" class="btn btn-primary btn-sm">
+                    Edit
+                </a>
+
+                {{-- Tombol Hapus --}}
+                <form action="{{ route('admin.payment.destroy', $payment->id) }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="btn btn-success btn-sm" onclick="return confirm('Verifikasi pembayaran ini?')">
-                        Verify
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus pembayaran ini?')">
+                        Hapus
                     </button>
                 </form>
-                @else
-                <span class="text-muted">✔ Sudah Diverifikasi</span>
-                @endif
             </td>
         </tr>
         @endforeach

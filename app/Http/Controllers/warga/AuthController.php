@@ -31,7 +31,7 @@ public function login(Request $request)
         $user = Auth::user();
 
         // Arahkan sesuai level user
-        if ($user->level === 'bendahara') {
+        if ($user->level === 'officer') {
             return redirect()->route('admin.payment');
         } elseif ($user->level === 'admin') {
             return redirect()->route('admin.warga'); // ke data warga
@@ -82,7 +82,7 @@ protected function redirectTo()
 {
     $user = auth()->user();
 
-    if ($user->level === 'bendahara') {
+    if ($user->level === 'officer') {
         return route('admin.payment'); // Bendahara ke halaman pembayaran
     }
 

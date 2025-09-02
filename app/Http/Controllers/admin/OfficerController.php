@@ -49,7 +49,7 @@ class OfficerController extends Controller
     public function edit($id)
     {
         $officer = User::findOrFail($id);
-        return view('admin.officer.edit', compact('officer'));
+        return view('admin.officer-edit', compact('officer'));
     }
 
     public function update(Request $request, $id)

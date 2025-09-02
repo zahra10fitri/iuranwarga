@@ -12,8 +12,18 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\OfficerController;
 
 use App\Http\Controllers\warga\DashboardController as WargaDashboardController;
+// use App\Http\Controllers\DuesMemberController;
 
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dues', [DuesMemberController::class, 'index'])->name('dues.index');
+    Route::get('/dues/create', [DuesMemberController::class, 'create'])->name('dues.create');
+    Route::post('/dues', [DuesMemberController::class, 'store'])->name('dues.store');
+});
 
+// Officer Dashboard
+Route::get('/officer/dashboard', function () {
+    return view('officer.dashboard'); // bikin blade sesuai kebutuhan
+})->name('officer.dashboard');
 
 // untuk warga
 Route::get('/warga/dashboard', [App\Http\Controllers\Warga\DashboardController::class, 'index'])

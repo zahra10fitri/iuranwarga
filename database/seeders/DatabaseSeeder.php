@@ -32,11 +32,11 @@ class DatabaseSeeder extends Seeder
           $user2 = User::create([
             'name' => 'ibu rani',
             'username' => 'burt',
-            'email' => 'bendahara@gmail.com',
+            'email' => 'officer@gmail.com',
             'password' => bcrypt('123'),
             'nohp' => '08123456781',
             'address' => 'Jl. Kenanga No. 8',
-            'level' => 'bendahara'
+            'level' => 'officer'
 
      ]);
         

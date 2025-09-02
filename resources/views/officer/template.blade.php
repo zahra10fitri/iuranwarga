@@ -44,10 +44,11 @@
 <div class="sidebar">
     <div class="logo">Iuran Warga</div>
     <a href="{{ route('beranda') }}"><i class="fas fa-layer-group me-2 "></i> beranda</a>
-    <a href="{{ route('dashboard') }}"><i class="fas fa-home me-2 "></i> Dashboard</a>
+    <a href="{{ route('officer.dashboard') }}"><i class="fas fa-home me-2 "></i> Dashboard</a>
     <!-- <a href="{{ route('admin.warga') }}"><i class="fas fa-users me-2"></i> Data Warga</a> -->
     <a href="{{ route('admin.payment') }}"><i class="fas fa-money-bill-wave me-2 "></i> Pembayaran</a>
     <a href="{{ route('admin.categories') }}"><i class="fas fa-layer-group me-2 "></i> Kategori Iuran</a>
+     <a href="{{ route('admin.dues') }}"><i class="fas fa-users me-2 "></i> Dues Member</a>
     <!-- <a href="{{ route('admin.officer') }}"><i class="fas fa-user-shield me-2 "></i> Data Officer</a> -->
 </div>
 

@@ -12,7 +12,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link text-dark" href="{{ route('beranda') }}">beranda</a></li>
                     <li class="nav-item"><a class="nav-link  text-dark" href="#">Iuran Saya</a></li>
-                    <li class="nav-item"><a class="nav-link text-danger" href="{{ route('logout') }}">Logout</a></li>
+                   
                 </ul>
             </div>
         </div>
