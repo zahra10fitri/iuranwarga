@@ -49,7 +49,8 @@
         <label for="level" class="form-label">Pilih Peran</label>
         <select name="level" class="form-control" required>
             <option value="warga">Warga</option>
-            <option value="petugas">Petugas</option>
+            <option value="petugas">officer</option>
+            <option value="petugas">admin</option>
         </select>
     </div>
 

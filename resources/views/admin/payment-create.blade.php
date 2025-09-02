@@ -38,17 +38,22 @@
     </div>
 
     {{-- Petugas --}}
-    <div class="mb-3">
-        <label for="petugas" class="form-label">Petugas</label>
-        <input type="text" name="petugas" id="petugas" class="form-control" value="warga" required>
-    </div>
+<div class="mb-3">
+    <label for="petugas" class="form-label">Petugas</label>
+    <select name="petugas" id="petugas" class="form-control" required>
+        <option value="">-- Pilih Petugas --</option>
+        <option value="warga">Warga</option>
+        <option value="officer">Officer</option>
+        <option value="admin">Admin</option>
+    </select>
+</div>
+
 
     <button type="submit" class="btn btn-success">Simpan</button>
     <a href="{{ route('admin.payment') }}" class="btn btn-secondary">Batal</a>
 </form>
 
 <script>
-    // Auto isi nominal sesuai kategori, tapi masih bisa diubah manual
     document.getElementById('idduescategory').addEventListener('change', function() {
         let nominal = this.options[this.selectedIndex].getAttribute('data-nominal');
         document.getElementById('nominal').value = nominal;
