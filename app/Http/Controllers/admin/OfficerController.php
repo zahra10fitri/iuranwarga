@@ -10,41 +10,57 @@ use App\Models\Payment;
 
 class OfficerController extends Controller
 {
-   public function index()
-    {
-        $officers = Officer::with('user')->get();
-        $payments = Payment::with(['user'])->get();
-        return view('admin.officer', compact('officers', 'payments'));
-    }
+//    public function index()
+//     {
+//         $officers = Officer::with('user')->get();
+//         $payments = Payment::with(['user'])->get();
+//         return view('admin.officer', compact('officers', 'payments'));
+//     }
+   
+// public function index()
+// {
+//     $officers = Officer::with('user')->get();
+//     return view('admin.officer', compact('officers'));
+//     $officers = User::where('level', 'officer')->get();
+//     return view('admin.officer', compact('officers'));
+// }
+
+public function index()
+{
+    $officers = User::where('level', 'officer')->get();
+    return view('admin.officer', compact('officers'));
+}
+
+
 
     public function create()
     {
         return view('admin.officer-create');
     }
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'username' => 'required|string|max:255|unique:users',
+        'email' => 'required|email|unique:users',
+        'password' => 'required|min:6',
+        'nohp' => 'required|string|max:20',
+        'address' => 'required|string',
+        'level' => 'required|in:officer'
+    ]);
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name'     => 'required',
-            'username' => 'required|unique:users',
-            'email'    => 'required|email|unique:users',
-            'password' => 'required|min:6',
-            'nohp'     => 'required',
-            'address'  => 'required',
-        ]);
+    User::create([
+        'name' => $request->name,
+        'username' => $request->username,
+        'email' => $request->email,
+        'password' => bcrypt($request->password), // jangan lupa hash password
+        'nohp' => $request->nohp,
+        'address' => $request->address,
+        'level' => $request->level,
+    ]);
 
-        User::create([
-            'name'     => $request->name,
-            'username' => $request->username,
-            'email'    => $request->email,
-            'password' => bcrypt($request->password),
-            'nohp'     => $request->nohp,
-            'address'  => $request->address,
-            'level'    => 'admin',
-        ]);
-
-        return redirect()->route('admin.officer')->with('success', 'Petugas berhasil ditambahkan');
-    }
+    return redirect()->route('admin.officer')->with('success', 'Officer berhasil ditambahkan.');
+}
 
     public function edit($id)
     {

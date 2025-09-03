@@ -11,11 +11,21 @@ use App\Models\DuesCategory;
 class PaymentController extends Controller
 {
     // Halaman untuk pembayaran dengan status "belum bayar"
-    public function index()
-    {
-        $payments = Payment::where('status', 'belum bayar')->get();
-        return view('admin.payment', compact('payments'));
-    }
+ public function index()
+{
+    // Ambil hanya pembayaran yang belum diverifikasi
+    $payments = Payment::with(['user', 'category'])
+        ->where('status', '!=', 'verified')
+        ->latest()
+        ->get();
+
+    return view('admin.payment', compact('payments'));
+}
+    // public function index()
+    // {
+    //     $payments = Payment::where('status', 'belum bayar')->get();
+    //     return view('admin.payment', compact('payments'));
+    // }
 
     // Halaman untuk pembayaran dengan status "verified"
     public function verified()

@@ -30,12 +30,13 @@
             @forelse ($officers as $officer)
             <tr>
                 <td>{{ $loop->iteration }}</td>
-               <td>{{ $officer->user->name }}</td>
-                <td>{{ $officer->user->username }}</td>
-                <td>{{ $officer->user->email }}</td>
-                <td>{{ $officer->user->nohp }}</td>
-                <td>{{ $officer->user->address }}</td>
-                 <td>{{ $officer->user->level }}</td>
+                <td>{{ $officer->name }}</td>
+                <td>{{ $officer->username }}</td>
+                <td>{{ $officer->email }}</td>
+                <td>{{ $officer->nohp }}</td>
+                <td>{{ $officer->address }}</td>
+                <td>{{ $officer->level }}</td>
+
                   <td>
                     <a href="{{ route('admin.officer.edit', $officer->id) }}" class="btn btn-sm btn-warning">Edit</a>
 

@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\DuesCategory;
 use App\Models\DuesMember;
+use App\Models\Payment;
+
 
 class DuesMemberController extends Controller
 {
     public function index()
     {
-        $dues = DuesMember::with(['user', 'category'])->get();
-        return view('admin.dues-index', compact('dues'));
+       $dues = DuesMember::with(['user','category'])->get();
+        return view('admin.dues', compact('dues'));
+
     }
 
     public function create()
@@ -22,22 +25,22 @@ class DuesMemberController extends Controller
         return view('admin.dues-create', compact('users', 'categories'));
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'iduser' => 'required|exists:users,id',
-            'idduescategory' => 'required|exists:dues_categories,id',
-            'jumlah' => 'required|numeric|min:0',
-            'status' => 'required|in:lunas,belum',
-        ]);
+public function store(Request $request)
+{
+    DuesMember::create([
+        'iduser' => $request->iduser,
+        'idduescategory' => $request->idduescategory,
+    ]);
 
-        DuesMember::create([
-            'iduser' => $request->iduser,
-            'idduescategory' => $request->idduescategory,
-            'jumlah' => $request->jumlah,
-            'status' => $request->status,
-        ]);
+    Payment::create([
+        'iduser' => $request->iduser,
+        'idduescategory' => $request->idduescategory,
+        'nominal' => $request->nominal,
+        'status' => 'belum bayar',
+        'petugas' => auth()->user()->id ?? null, // isi sesuai login user
+    ]);
 
-        return redirect()->route('admin.dues.index')->with('success', 'Data iuran berhasil ditambahkan.');
-    }
+    return redirect()->route('admin.dues')->with('success', 'Data iuran berhasil ditambahkan!');
+}
+
 }

@@ -12,13 +12,15 @@ use App\Http\Controllers\Admin\PaymentController;
 use App\Http\Controllers\Admin\OfficerController;
 
 use App\Http\Controllers\warga\DashboardController as WargaDashboardController;
-// use App\Http\Controllers\DuesMemberController;
+use App\Http\Controllers\DuesMemberController;
+// halaman index (daftar iuran)
+Route::get('/admin/dues', [DuesMemberController::class, 'index'])->name('admin.dues');
 
-Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dues', [DuesMemberController::class, 'index'])->name('dues.index');
-    Route::get('/dues/create', [DuesMemberController::class, 'create'])->name('dues.create');
-    Route::post('/dues', [DuesMemberController::class, 'store'])->name('dues.store');
-});
+// form tambah data
+Route::get('/admin/dues/create', [DuesMemberController::class, 'create'])->name('admin.dues.create');
+
+// simpan data
+Route::post('/admin/dues', [DuesMemberController::class, 'store'])->name('admin.dues.store');
 
 // Officer Dashboard
 Route::get('/officer/dashboard', function () {
@@ -55,10 +57,14 @@ Route::get('/admin/categories', [DuesCategoryController::class, 'index'])->name(
 Route::get('/admin/warga', [WargaController::class, 'index'])->name('admin.warga');
 Route::get('/admin/warga-create', [WargaController::class, 'index'])->name('admin.warga');
 Route::get('/admin/payment', [PaymentController::class, 'index'])->name('admin.payment');
+ 
+
 
     Route::get('/admin/officer', [OfficerController::class, 'index'])->name('admin.officer');
     Route::get('/admin/officer/create', [OfficerController::class, 'create'])->name('admin.officer.create');
     Route::post('/admin/officer', [OfficerController::class, 'store'])->name('admin.officer.store');
+    Route::post('/admin/officer', [OfficerController::class, 'store'])->name('admin.officer.store');
+
     Route::get('/admin/officer/{id}/edit', [OfficerController::class, 'edit'])->name('admin.officer.edit');
     Route::put('/admin/officer/{id}', [OfficerController::class, 'update'])->name('admin.officer.update');
     Route::delete('/admin/officer/{id}', [OfficerController::class, 'destroy'])->name('admin.officer.destroy');
